@@ -1,0 +1,69 @@
+<!DOCTYPE>
+<html> <!-- THIS TAG REPRESENTS THE DOCUMENT OBJECT -->
+	<!-- This is a basic HTML template, which conatains all of the tags you will need to start just about any web page -->
+	<head>
+		<title></title>
+		<style></style>
+		<script>
+			function initialize()
+			{
+				numberOutput = document.getElementById("numberout");
+				negativeButton = document.getElementById("negativetn");
+				
+				myNumber = 0;
+				negativesAllowed = false;
+				
+				display();
+			}
+			
+			function addOne()
+			{
+				myNumber++;
+				display();
+			}
+
+			function subtractOne()
+			{
+				myNumber--;
+				if (myNumber < 0 && !negativesAllowed)
+				{
+					myNumber = 0;
+				}
+				
+				display();
+			}
+			
+			function toggleNegatives()
+			{
+				negativesAllowed = !negativesAllowed;
+				if (myNumber < 0 && negativesAllowed == false)
+				{
+					myNumber = 0;
+				}
+				display();
+			}
+			
+			function display()
+			{
+				numberOutput.innerHTML = myNumber;
+
+				if (!negativesAllowed)
+				{
+					negativeButton.innerHTML = "Negatives are OFF";
+				}
+				else
+				{
+					negativeButton.innerHTML = "Negatives are ON";
+				}
+			}
+		</script>
+
+	</head>
+	<body onload = "initialize();">
+		<h1 id = "numberout"></h1>
+		<hr />	
+		<button onclick = "addOne();">Add</button> 
+		<button onclick = "subtractOne();">Subtract</button> 
+		<button onclick = "toggleNegatives();" id = "negativetn">Negatives are OFF</button>
+	</body>
+</html>

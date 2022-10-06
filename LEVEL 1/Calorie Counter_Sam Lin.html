@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+
+            function initalize()
+            {
+                proteinsOutput1 = document.getElementById('protein1');
+                carbohydratesOutput1 = document.getElementById('carbohydrate1');
+                fatsOutput1 = document.getElementById('fat1');
+                caloriesOutput1 = document.getElementById('calorie1');
+
+                proteinsOutput2 = document.getElementById('protein2');
+                carbohydratesOutput2 = document.getElementById('carbohydrate2');
+                fatsOutput2 = document.getElementById('fat2');
+                caloriesOutput2 = document.getElementById('calorie2');
+
+                proteinsOutput3 = document.getElementById('protein3');
+                carbohydratesOutput3 = document.getElementById('carbohydrate3');
+                fatsOutput3 = document.getElementById('fat3');
+                caloriesOutput3 = document.getElementById('calorie3');
+
+                totalOutput = document.getElementById("totalCal")
+
+                numberPro1 = 0;
+                numberCarb1 = 0;
+                numberFat1 = 0;
+                numberCal1 = 0;
+
+                numberPro2 = 0;
+                numberCarb2 = 0;
+                numberFat2 = 0;
+                numberCal2 = 0;
+
+                numberPro3 = 0;
+                numberCarb3 = 0;
+                numberFat3 = 0;
+                numberCal3 = 0;
+                numberTotalCal = 0;
+
+                display();
+            }
+
+            function add(type, course, number)
+            {
+                if (course == "Appetizer")
+                    if (type == "protein")
+                    {
+                        numberPro1 += number;
+                    }
+                    else if (type == "carbohydrate")
+                    {
+                        numberCarb1 += number;
+                    }
+                    else
+                    {
+                        numberFat1 += number;
+                    }
+                else if (course == "Entree")
+                {
+                    if (type == "protein")
+                    {
+                        numberPro2 += number;
+                    }
+                    else if (type == "carbohydrate")
+                    {
+                        numberCarb2 += number;
+                    }
+                    else
+                    {
+                        numberFat2 += number;
+                    }
+                }
+                else
+                {
+                    if (type == "protein")
+                    {
+                        numberPro3 += number;
+                    }
+                    else if (type == "carbohydrate")
+                    {
+                        numberCarb3 += number;
+                    }
+                    else
+                    {
+                        numberFat3 += number;
+                    }
+                }
+            
+                calculateCalories();
+                display();
+            }
+
+            function subtract(type, course, number)
+            {
+                if (course == "Appetizer")
+                    if (type == "protein")
+                    {
+                        numberPro1 -= number;
+                    }
+                    else if (type == "carbohydrate")
+                    {
+                        numberCarb1 -= number;
+                    }
+                    else
+                    {
+                        numberFat1 -= number;
+                    }
+                else if (course == "Entree")
+                {
+                    if (type == "protein")
+                    {
+                        numberPro2 -= number;
+                    }
+                    else if (type == "carbohydrate")
+                    {
+                        numberCarb2 -= number;
+                    }
+                    else
+                    {
+                        numberFat2 -= number;
+                    }
+                }
+                else
+                {
+                    if (type == "protein")
+                    {
+                        numberPro3 -= number;
+                    }
+                    else if (type == "carbohydrate")
+                    {
+                        numberCarb3 -= number;
+                    }
+                    else
+                    {
+                        numberFat3 -= number;
+                    }
+                }
+
+                if (numberPro1 < 0)
+                {
+                    numberPro1 = 0;
+                }
+                if (numberPro2 < 0)
+                {
+                    numberPro2 = 0;
+                }
+                if (numberPro3 < 0)
+                {
+                    numberPro3 = 0;
+                }
+
+                if (numberCarb1 < 0)
+                {
+                    numberCarb1 = 0;
+                }
+                if (numberCarb2 < 0)
+                {
+                    numberCarb2 = 0;
+                }
+                if (numberCarb3 < 0)
+                {
+                    numberCarb3 = 0;
+                }
+
+                if (numberFat1 < 0)
+                {
+                    numberFat1 = 0;
+                }
+                if (numberFat2 < 0)
+                {
+                    numberFat2 = 0;
+                }
+                if (numberFat3 < 0)
+                {
+                    numberFat3 = 0;
+                }
+
+                calculateCalories();
+                display();
+            }
+
+            function calculateCalories()
+            {
+                numberCal1 = (numberFat1*9) + (numberCarb1*4) + (numberPro1*4);
+                numberCal2 = (numberFat2*9) + (numberCarb2*4) + (numberPro2*4);
+                numberCal3 = (numberFat3*9) + (numberCarb3*4) + (numberPro3*4);
+                numberTotalCal = numberCal1 + numberCal2 + numberCal3;
+            }
+
+            function reset(course)
+            {
+                if (course == "Appetizer")
+                {
+                    numberPro1 = 0;
+                    numberCarb1 = 0;
+                    numberFat1 = 0;
+                    numberCal1 = 0;
+                }
+                else if (course == "Entree")
+                {
+                    numberPro2 = 0;
+                    numberCarb2 = 0;
+                    numberFat2 = 0;
+                    numberCal2 = 0;
+                }
+                else if (course == "Dessert")
+                {
+                    numberPro3 = 0;
+                    numberCarb3 = 0;
+                    numberFat3 = 0;
+                    numberCal3 = 0;
+                }
+                else
+                {
+                    numberPro1 = 0;
+                    numberCarb1 = 0;
+                    numberFat1 = 0;
+                    numberCal1 = 0;
+                    numberPro2 = 0;
+                    numberCarb2 = 0;
+                    numberFat2 = 0;
+                    numberCal2 = 0;
+                    numberPro3 = 0;
+                    numberCarb3 = 0;
+                    numberFat3 = 0;
+                    numberCal3 = 0;
+                }
+                calculateCalories();
+                display();
+            }
+
+            function display()
+            {
+                proteinsOutput1.innerHTML = numberPro1;
+                carbohydratesOutput1.innerHTML = numberCarb1;
+                fatsOutput1.innerHTML = numberFat1;
+                caloriesOutput1.innerHTML = numberCal1;
+                            
+                proteinsOutput2.innerHTML = numberPro2;
+                carbohydratesOutput2.innerHTML = numberCarb2;
+                fatsOutput2.innerHTML = numberFat2;
+                caloriesOutput2.innerHTML = numberCal2;
+                
+                proteinsOutput3.innerHTML = numberPro3;
+                carbohydratesOutput3.innerHTML = numberCarb3;
+                fatsOutput3.innerHTML = numberFat3;
+                caloriesOutput3.innerHTML = numberCal3;
+                
+                totalOutput.innerHTML = numberTotalCal;
+            }
+
+        </script>
+    </head>
+    <body onload = "initalize();">
+        <div>
+            <h1>Appetizer</h1>
+            <h3 style = "display:inline-block;">Proteins: </h3>
+            <h3 style = "display:inline-block; width: 100px" id = "protein1"></h3>
+
+            <h3 style = "display:inline-block">Carbohydrates: </h3>
+            <h3 style = "display:inline-block; width: 100px" id = "carbohydrate1"></h3>
+
+            <h3 style = "display:inline-block">Fats: </h3>
+            <h3 style = "display:inline-block; width: 100px" id = "fat1"></h3>
+
+            <h3 style = "display:inline-block">Calories: </h3>
+            <h3 style = "display:inline-block; width: 100px" id = "calorie1"></h3>
+        </div>
+        <div>
+            <button onclick = "add('protein', 'Appetizer', 1);">Add</button> 
+		    <button onclick = "subtract('protein', 'Appetizer', 1);">Subtract</button> 
+            <div style="width: 75px; display: inline-block;"></div>
+            <button onclick = "add('carbohydrate', 'Appetizer', 1);">Add</button> 
+		    <button onclick = "subtract('carbohydrate', 'Appetizer', 1);">Subtract</button> 
+            <div style="width: 75px; display: inline-block;"></div>
+            <button onclick = "add('fat', 'Appetizer', 1);">Add</button> 
+		    <button onclick = "subtract('fat', 'Appetizer', 1);">Subtract</button> 
+            <div style="width: 75px; display: inline-block;"></div>
+            <button style = "width: 75px; display: inline-block" onclick = "reset('Appetizer');">Reset</button> 
+            <br />
+            <button onclick = "add('protein', 'Appetizer', 5);">Add 5</button> 
+		    <button onclick = "subtract('protein', 'Appetizer', 5);">Subtract 5</button> 
+            <div style="width: 43px; display: inline-block;"></div>
+            <button onclick = "add('carbohydrate', 'Appetizer', 5);">Add 5</button> 
+		    <button onclick = "subtract('carbohydrate', 'Appetizer', 5);">Subtract 5</button> 
+            <div style="width: 40px; display: inline-block;"></div>
+            <button onclick = "add('fat', 'Appetizer', 5);">Add 5</button> 
+		    <button onclick = "subtract('fat', 'Appetizer', 5);">Subtract 5</button> 
+        </div>
+
+        <hr />
+
+        <div>
+            <h1>Entree</h1>
+            <h3 style = "display:inline-block;">Proteins: </h3>
+            <h3 style = "display:inline-block; width: 100px" id = "protein2"></h3>
+
+            <h3 style = "display:inline-block">Carbohydrates: </h3>
+            <h3 style = "display:inline-block; width: 100px" id = "carbohydrate2"></h3>
+
+            <h3 style = "display:inline-block">Fats: </h3>
+            <h3 style = "display:inline-block; width: 100px" id = "fat2"></h3>
+
+            <h3 style = "display:inline-block">Calories: </h3>
+            <h3 style = "display:inline-block; width: 100px" id = "calorie2"></h3>
+        </div>
+        <div>
+            <button onclick = "add('protein', 'Entree', 1);">Add</button> 
+		    <button onclick = "subtract('protein', 'Entree', 1);">Subtract</button> 
+            <div style="width: 75px; display: inline-block;"></div>
+            <button onclick = "add('carbohydrate', 'Entree', 1);">Add</button> 
+		    <button onclick = "subtract('carbohydrate', 'Entree', 1);">Subtract</button> 
+            <div style="width: 75px; display: inline-block;"></div>
+            <button onclick = "add('fat', 'Entree', 1);">Add</button> 
+		    <button onclick = "subtract('fat', 'Entree', 1);">Subtract</button>
+            <div style="width: 75px; display: inline-block;"></div>
+            <button style = "width: 75px; display: inline-block" onclick = "reset('Entree');">Reset</button> 
+            <br />
+            <button onclick = "add('protein', 'Entree', 5);">Add 5</button> 
+		    <button onclick = "subtract('protein', 'Entree', 5);">Subtract 5</button> 
+            <div style="width: 43px; display: inline-block;"></div>
+            <button onclick = "add('carbohydrate', 'Entree', 5);">Add 5</button> 
+		    <button onclick = "subtract('carbohydrate', 'Entree', 5);">Subtract 5</button> 
+            <div style="width: 40px; display: inline-block;"></div>
+            <button onclick = "add('fat', 'Entree', 5);">Add 5</button> 
+		    <button onclick = "subtract('fat', 'Entree', 5);">Subtract 5</button> 
+            
+        </div>
+
+        <hr />
+
+        <div>
+            <h1>Dessert</h1>
+            <h3 style = "display:inline-block;">Proteins: </h3>
+            <h3 style = "display:inline-block; width: 100px" id = "protein3"></h3>
+
+            <h3 style = "display:inline-block">Carbohydrates: </h3>
+            <h3 style = "display:inline-block; width: 100px" id = "carbohydrate3"></h3>
+
+            <h3 style = "display:inline-block">Fats: </h3>
+            <h3 style = "display:inline-block; width: 100px" id = "fat3"></h3>
+
+            <h3 style = "display:inline-block">Calories: </h3>
+            <h3 style = "display:inline-block; width: 100px" id = "calorie3"></h3>
+        </div>
+        <div>
+            <button onclick = "add('protein', 'Dessert', 1);">Add</button> 
+		    <button onclick = "subtract('protein', 'Dessert', 1);">Subtract</button> 
+            <div style="width: 75px; display: inline-block;"></div>
+            <button onclick = "add('carbohydrate', 'Dessert', 1);">Add</button> 
+		    <button onclick = "subtract('carbohydrate', 'Dessert', 1);">Subtract</button> 
+            <div style="width: 75px; display: inline-block;"></div>
+            <button onclick = "add('fat', 'Dessert', 1);">Add</button> 
+		    <button onclick = "subtract('fat', 'Dessert', 1);">Subtract</button>
+            <div style="width: 75px; display: inline-block;"></div>
+            <button style = "width: 75px; display: inline-block" onclick = "reset('Dessert');">Reset</button> 
+            <br />
+            <button onclick = "add('protein', 'Dessert', 5);">Add 5</button> 
+		    <button onclick = "subtract('protein', 'Dessert', 5);">Subtract 5</button> 
+            <div style="width: 43px; display: inline-block;"></div>
+            <button onclick = "add('carbohydrate', 'Dessert', 5);">Add 5</button> 
+		    <button onclick = "subtract('carbohydrate', 'Dessert', 5);">Subtract 5</button> 
+            <div style="width: 40px; display: inline-block;"></div>
+            <button onclick = "add('fat', 'Dessert', 5);">Add 5</button> 
+		    <button onclick = "subtract('fat', 'Dessert', 5);">Subtract 5</button> 
+        </div>
+        
+        <hr />
+
+        <div>
+            <h1 style = "display:inline-block">Total Calories: </h1>
+            <h1 style = "display:inline-block" id = "totalCal"></h1>
+            <br />
+            <button style = "width: 100px; display: inline-block" onclick = "reset('All');">Reset</button> 
+        </div>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE>
+<html>
+	<!-- This is a basic HTML template, which conatains all of the tags you will need to start just about any web page -->
+	<head>
+		<title></title>
+		<style></style>
+		<script>
+			function initialize()
+			{
+				num1 = 3;
+				num2 = 7;
+			}
+			
+			function addNumbers()
+			{
+				var result = num1 + num2;
+				console.log(result);
+			}
+			
+			function subtractNumbers()
+			{
+				var result = num1 - num2;
+				console.log(result);
+			}
+			
+			function multiplyNumbers()
+			{
+				var result = num1 * num2;
+				console.log(result);
+			}
+			
+			function divideNumbers()
+			{
+				var result = num1 / num2;
+				console.log(result);
+			}
+		</script>
+	</head>
+	<body onload = "initialize();">
+		<button onclick = "addNumbers();">Add the 2 Numbers</button>
+		<button onclick = "subtractNumbers();">Subtract the 2 Numbers</button>
+		<button onclick = "multiplyNumbers();">Mutiply the 2 Numbers</button>
+		<button onclick = "divideNumbers();">Divide the 2 Numbers</button>
+	</body>
+</html>
