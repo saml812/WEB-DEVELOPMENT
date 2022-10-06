@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Matching Game_Sam Lin</title>
+        <style></style>
+        <link rel = "stylesheet" href = "styles\styles.css"/>
+        <script src = "script\utilities.js"></script>
+    </head>
+
+    <body onload = "initialize();">
+        <div id = "title">Matching Game</div>
+
+        <div>
+            <p>Instructions: 
+                <br/>Click on any 2 cards to flip them over. 
+                <br/>Cards will remain facing up only if the selected cards match. 
+                <br/>The score increase each time a card is clicked. 
+                <br/>The goal of the game is to have all the cards face up and keep the score low as possible.
+            </p>
+        </div>
+			
+			<div id = "game-layout">
+				<img id = "back1" onclick = "flip(card1);" />
+				<img id = "back2" onclick = "flip(card2);" />
+				<img id = "back3" onclick = "flip(card3);" />
+				<img id = "back4" onclick = "flip(card4);" />
+				</br>
+				<img id = "back5" onclick = "flip(card5);" />
+				<img id = "back6" onclick = "flip(card6);" />
+				<img id = "back7" onclick = "flip(card7);" />
+				<img id = "back8" onclick = "flip(card8);" />
+				</br>
+				<img id = "back9" onclick = "flip(card9);" />
+				<img id = "back10" onclick = "flip(card10);" />
+				<img id = "back11" onclick = "flip(card11);" />
+				<img id = "back12" onclick = "flip(card12);" />
+				<br>
+				<img id = "back13" onclick = "flip(card13);" />
+				<img id = "back14" onclick = "flip(card14);" />
+				<img id = "back15" onclick = "flip(card15);" />
+				<img id = "back16" onclick = "flip(card16);" />
+			</div>
+
+            <p id = "messageBoard"></p>
+
+			<div id = "scoreboard"> 
+				Score: <span id = "score">0</span>
+				<br/>
+				<button onclick = "initialize();">New Game</button> 
+            </div>
+    </body>
+</html>
