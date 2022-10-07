@@ -40,7 +40,7 @@ function display(){
 }
 
 function randomNumberGenerator(max){
-    return Math.floor(Math.random()*Math.floor(max));
+    return Math.floor(Math.random()*max);
 }
 
 function randomAssignment(){
