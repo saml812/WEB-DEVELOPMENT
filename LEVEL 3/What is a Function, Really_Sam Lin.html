@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <style></style>
+        <script>
+
+            function initialize(){
+                numberOutput = document.getElementById("numoutput");
+                modifier = 0;
+                number = 0;
+            }
+
+            function modifyNumber(){
+                number += modifier;
+                display();
+            }
+
+            function display(){
+                numberOutput.innerHTML = number;
+            }
+
+            function getRandomInteger(lower, upper){
+                var multiplier = upper - (lower - 1);
+                var rnd = parseInt(Math.random() * multiplier) + lower;
+                return rnd;
+            }
+
+            function modifyNumber(modifier){
+                number += modifier;
+                display();
+            }
+            
+
+        </script>
+    </head>
+    <body onload = "initialize();">
+        <div id = "numoutput">0</div>
+        <hr/>
+        <button onclick = "modifier = 1;modifyNumber(modifier);">Add 1</button>
+        <button onclick = "modifier = -1;modifyNumber(modifier);">Subtract 1</button>
+        <button onclick = "modifier = 5;modifyNumber(modifier);">Add 5</button>
+        <button onclick = "modifier = -5;modifyNumber(modifier);">Subtract 5</button>
+        <button onclick = "modifier = 10;modifyNumber(modifier);">Add 10</button>
+        <button onclick = "modifier = -10;modifyNumber(modifier);">Subtract 10</button>
+        <button onclick = "modifyNumber(getRandomInteger(-10,10));">Modify The Number Randomly</button>
+    </body>
+</html>

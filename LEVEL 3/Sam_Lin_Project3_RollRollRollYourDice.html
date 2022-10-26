@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Roll Roll Roll Your Dice_Sam Lin</title>
+        <style>
+            #heading {
+                text-align: left;
+            }
+            body {
+                background: rgb(162,157,245);
+                background: linear-gradient(90deg, rgba(162,157,245,1) 20%, rgba(251,126,223,1) 41%, rgba(251,126,223,1) 60%, rgba(58,236,231,1) 84%);
+                text-align: center;
+                justify-content: center;
+            }
+            table{
+                border: thick solid black;
+                width: 25%;
+                border-collapse: collapse;
+            }
+           th, td{
+                border: thin solid black;
+                padding: 10px;
+                width: 50%;
+                text-align: center;
+                background-color: white;
+           }
+           input {
+            box-sizing: border-box;
+            width: 200px;
+            height: 25px;
+            align-items: center;
+            justify-content: center;
+           }
+           #input1 {
+            cursor: default;
+           }
+           #inputform {
+            margin-bottom: 12px;
+            font-size: 18pt;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+           }
+           #container {
+            background-color: #7ff2ef;
+            border-radius: 25px;
+            padding: 25px;
+            height: 150px;
+            width: 350px;
+            display: block;
+            text-align: center;
+            border-radius: 25px;
+            border: 2px solid black;
+           }
+           button {
+            background-color: white;
+            text-align: left;
+            width: 125px;
+            height: 30px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 15pt;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+           }
+           button:hover{
+            background-color: #a29df5
+           }
+           #table-container{
+            width: 100%;
+            height: 100%;
+            background-color: #7ff2ef;
+            border-radius: 25px;
+            overflow-y: scroll;
+            padding-right: 17px;
+            box-sizing: content-box;
+            text-align: center;
+            cursor: default;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 14pt;
+           }
+           #container{
+            position: absolute;
+            top: 13%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
+            cursor: default;
+           }
+           #table-containerfake{
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
+            width: 1000px;
+            height: 650px;
+            background-color: bisque;
+            border-radius: 25px;
+            overflow: hidden;
+            border: 2px solid black;
+           }
+           #dicetable{
+            margin-left: auto;
+            margin-right: auto;
+           }
+        </style>
+        <script>
+            
+            initialize = () => {
+                inputContainer = document.getElementById("inputform");
+                diceTable = document.getElementById("dicetable");
+                numberArray = [];
+                resultArray = [];
+
+                numDices = 0;
+                numRolls = 0;
+            }
+
+            recordData = () => {
+                resetTable();
+                numDices = inputContainer.numDice.value;
+                numRolls = inputContainer.numRoll.value;
+                rollDice();
+                
+            }
+
+            calculateRolls = () => {
+                for (let i = 0; i < numRolls; i++){
+                    var totalRoll = 0;
+                    for (let j = 0; j < numDices; j++){
+                        let dieRoll = getRandomInteger(1,6);
+                        totalRoll += dieRoll;
+                        numberArray.push(dieRoll);
+                    }
+                    resultArray.push(totalRoll);
+                }
+                console.log(numberArray);
+            }
+
+            rollDice = () => {
+                calculateRolls();
+                uniqueList = [...new Set(resultArray)];
+                for (let i = 0; i < resultArray.length; i++){
+                    var newRow = diceTable.insertRow();
+                    let newCell = newRow.insertCell();
+                    newCell.innerHTML = "Roll " + (i + 1);
+                    var totalRoll = resultArray[i];
+                    newCell = newRow.insertCell();
+                    newCell.innerHTML = totalRoll;
+                    newCell = newRow.insertCell();
+                    getFrequency(newCell, totalRoll);
+                }
+
+                newCell = newRow.insertCell();
+                newCell.innerHTML = getMean();
+                newCell = newRow.insertCell();
+                newCell.innerHTML = getMedian();
+                newCell = newRow.insertCell();
+                newCell.innerHTML = getMode();
+                newCell = newRow.insertCell();
+                newCell.innerHTML = getDouble();
+                newCell = newRow.insertCell();
+                newCell.innerHTML = getTriple();
+            }
+
+            getRandomInteger = (lower, upper) => {
+                let multiplier = upper - (lower - 1);
+                let rnd = parseInt(Math.random() * multiplier) + lower;
+                return rnd;
+            }
+
+            resetTable = () => {
+                let rowCount = diceTable.rows.length;
+                for (let i = 1; i < rowCount; i++){
+                    diceTable.deleteRow(1);
+                }
+                numberArray = [];
+                resultArray = [];
+            }
+
+            getMean = () => {
+                let total = 0;
+                let mean = 0;
+                for (let i = 0; i < resultArray.length; i++){
+                    total += resultArray[i];
+                }
+                mean = total/resultArray.length;
+                mean = Math.round(mean * 100) / 100
+                return mean;
+            }
+
+            getMedian = () => {
+                resultArray.sort();
+                return resultArray.length%2 != 0 ? resultArray[Math.trunc(resultArray.length/2)] : (resultArray[resultArray.length/2] + resultArray[(resultArray.length/2)-1])/2;
+            }
+
+            getMode = () => {
+                let highest = 0;
+                let mode = 0;
+                modeNumbers = [];
+                for (let i = 0; i < uniqueList.length; i++){
+                    var current = getFrequency1(uniqueList[i]);
+                    if (current > highest){
+                        highest = current;
+                    }
+                }
+
+                for (i = 0; i < uniqueList.length; i++){
+                    var current = getFrequency1(uniqueList[i]);
+                    if (current >= highest){
+                        modeNumbers.push(uniqueList[i]);
+                    }
+                }
+
+                let numbers = "";
+                for (i = 0; i < modeNumbers.length; i++){
+                    numbers += modeNumbers[i] + ", ";
+                }
+                return numbers.substring(0,numbers.length-2);
+            }
+
+            getFrequency1 = (number) => {
+                let count = 0;
+                for (let i = 0; i < resultArray.length; i++){
+                    (number == resultArray[i] ? count++ : 0)
+                }
+                return count;
+            }
+
+            getFrequency = (newCell, totalRoll) => {
+                let count = 0;
+                for (let i = 0; i < resultArray.length; i++){
+                    if (totalRoll == resultArray[i])
+                    {
+                        count++;
+                    }
+                }
+                newCell.innerHTML = count;
+            }
+
+            getDouble = () => {
+                let count = 0;
+                if (numDices == 2){
+                    for (i = 0; i < numberArray.length; i+=2){
+                        if (numberArray[i] == numberArray[i+1]){
+                            count++;
+                        }
+                    }
+                }
+                else if (numDices == 3){
+                    for (i = 0; i < numberArray.length; i+=3){
+                        if (numberArray[i] == numberArray[i+1]){
+                            count++;
+                        }
+                        else if (numberArray[i] == numberArray[i+2]){
+                            count++
+                        }
+                        else if (numberArray[i+1] == numberArray[i+2])
+                        {
+                            count++;
+                        }
+                    }
+                }
+                return count;
+            }
+            
+
+            getTriple = () => {
+                let count = 0;
+                if (numDices > 2){
+                    for (i = 0; i < numberArray.length; i+=3){
+                        if (numberArray[i] === numberArray[i+1] && numberArray[i] == numberArray[i+2])
+                        {
+                            count++;
+                        }
+                    }
+                }
+                return count;
+            }
+
+        </script>
+    </head>
+    <body onload="initialize();">
+
+        <h1 id="heading">Roll Roll Roll Your Dice!</h1>
+        <h1 id="heading">F12 Console for specifc numbers</h1>
+        <div id="container">
+            <form id="inputform">
+                How many dice to roll: <input id="input1" type="number" name="numDice" max="3" min="1" onkeydown="return false">
+                <br/>
+                How many times to roll: <input id="input2" type="number" name="numRoll" min="1"/>
+            </form>
+            <button onclick="recordData();">Roll</button>
+        </div>
+
+        <div id="table-containerfake">
+            <div id="table-container">
+                <h1>Data Table</h1>        
+                <table id="dicetable">
+                    <tr>
+                        <th>Roll #</th>   
+                        <th>Result</th>
+                        <th>Frequency</th>
+                        <th>Mean</th>
+                        <th>Median</th>
+                        <th>Mode</th>
+                        <th>Doubles</th>
+                        <th>Triples</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
